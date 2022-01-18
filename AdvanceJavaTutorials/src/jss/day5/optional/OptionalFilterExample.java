@@ -37,7 +37,7 @@ class Phone
 public class OptionalFilterExample {
     
 
-    public static void main(String args[])
+    public static void main(String args[]) throws Exception
     {
      Phone samsung1 = new Phone("Galaxy Note 21", "Samsung");
      Phone samsung2 = new Phone("Galaxy S 21", "Samsung");
@@ -55,11 +55,17 @@ public class OptionalFilterExample {
      phoneList.add(samsung3);
     
 
-        Stream<Phone> streamlist = phoneList.stream().filter(p -> (p.company.equalsIgnoreCase("apple"))&&(p.model.startsWith("Galaxy")));
+        Stream<Phone> streamlist = phoneList.stream().filter(p -> (p.company.equalsIgnoreCase("Nokia"))&&(p.model.startsWith("Galaxy")));
         List<Phone> filteredlist = streamlist.collect(Collectors.toList());
 
          System.out.println("Phone List : " + phoneList);
          System.out.println("Phone List Filtered: " + filteredlist);
+         
+         Optional<Optional<Phone>> oplist = Optional.of(Optional.of(filteredlist.get(0)));
+         Optional<Phone> plist = oplist.orElseThrow(Exception::new);
+         
+          System.out.println("Phone List final: " + plist);
+        
 
 
     }
