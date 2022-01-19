@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A Java program to demonstrate working of
+ * FlyWeight Pattern with example of
+ * Inpateints and Outpatients of Hospital
  */
 package jss.day1.flyweight;
 
@@ -12,18 +12,19 @@ import java.util.Random;
  *
  * @author Jayasankar
  */
+//Patient interface
 interface Patient
 {
     public void labtest(String weapon);
     public void diagnose();
 }
   
-
+//in patient Class a type of patient
 class InPatient implements Patient
 {
-   
+   // Intrinsic Attribute  ( in which value can be modified only inside constructor_)
     private final boolean admitted;
-  
+   // Extrinsic Attribute  ( in which value can be modified within the class )
     private String test;
   
     public InPatient()
@@ -65,12 +66,13 @@ class OutPatient implements Patient
   
 
   
-// Class used to get a player using HashMap (Returns
-// an existing player if a player of given type exists.
-// Else creates a new player and returns it.
+// Class used to get a Patient using HashMap (Returns
+// an existing patient if a patient of given type exists.
+// Else creates a new patient and returns it.
 class PatientFactory
 {
-    
+    /* HashMap stores the reference to the object
+       of Inpatient or Outpatient.  */
     private static HashMap <String, Patient> hm =
                          new HashMap<String, Patient>();
 
@@ -78,7 +80,9 @@ class PatientFactory
     {
         Patient p = null;
   
-        
+         /* If an object for IP or OP has already been
+           created simply return its reference */
+         
         if (hm.containsKey(type))
                 p = hm.get(type);
         else
@@ -98,7 +102,7 @@ class PatientFactory
                 System.out.println("Unreachable code!");
             }
   
-          
+          // Once created insert it into the HashMap
             hm.put(type, p);
         }
         return p;
@@ -131,8 +135,8 @@ public class PatientMain
         }
     }
   
-    // Utility methods to get a random player type and
-    // weapon
+    // Utility methods to get a random Patient type and
+    // test
     public static String getRandPatientType()
     {
         Random r = new Random();
